@@ -95,7 +95,7 @@ sub _versioncode_from_string {
                         ( use \s* version \s* ; \s* )?
                         (our)? \s* \$VERSION \s* = \s* 
                         (
-                                           ['"] [\d\.\_]+ ['"]
+                                        ['"] v? [\d\.\_]+ ['"]
                             |      q{1,2}\( \s* [\d\.\_]+ \s* \)
                             |                   [\d\.\_]+
                             |  qv\( \s* ['"] v? [\d\.\_]+ ['"] \s* \)
