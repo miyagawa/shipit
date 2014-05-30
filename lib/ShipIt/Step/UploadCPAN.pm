@@ -7,11 +7,13 @@ use File::Spec;
 sub init {
     my ($self, $conf) = @_;
     my $exe = '';
-    foreach my $dir (File::Spec->path) {
-        $exe = 'cpan-upload-http';
-        last if -x File::Spec->catfile($dir, $exe);
-        $exe = 'cpan-upload';
-        last if -x File::Spec->catfile($dir, $exe);
+    WHICH: foreach my $dir (File::Spec->path) {
+        for my $command (qw(cpan-upload-http cpan-upload)) {
+            if (-x File::Spec->catfile($dir, $command)) {
+                $exe = $command;
+                last WHICH;
+            }
+        }
     }
     die "cpan-upload-http not found\n" unless $exe;
     $self->{exe} = $exe;
